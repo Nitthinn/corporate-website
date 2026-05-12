@@ -1,6 +1,6 @@
 # MARVOS - Corporate Branding & Blog Management System
 
-![Homepage Screenshot](./screenshots/homepage-desktop.png)
+![Homepage Screenshot](./screenshots/screenshots/Screenshot 2026-05-12 180829.png)
 
 A complete MERN stack application featuring a professional corporate branding landing page and a fully functional blog management system with user authentication.
 
