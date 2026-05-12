@@ -1,8 +1,6 @@
 const Blog = require('../models/Blog');
 
-// @desc    Get all blogs
-// @route   GET /api/blogs
-// @access  Public
+
 const getBlogs = async (req, res) => {
   try {
     const { status, page = 1, limit = 10 } = req.query;
@@ -29,9 +27,7 @@ const getBlogs = async (req, res) => {
   }
 };
 
-// @desc    Get single blog
-// @route   GET /api/blogs/:slug
-// @access  Public
+
 const getBlogBySlug = async (req, res) => {
   try {
     const blog = await Blog.findOne({ slug: req.params.slug })
@@ -41,7 +37,7 @@ const getBlogBySlug = async (req, res) => {
       return res.status(404).json({ message: 'Blog not found' });
     }
     
-    // Increment views
+
     blog.views += 1;
     await blog.save();
     
@@ -51,14 +47,12 @@ const getBlogBySlug = async (req, res) => {
   }
 };
 
-// @desc    Create blog
-// @route   POST /api/blogs
-// @access  Private
+
 const createBlog = async (req, res) => {
   try {
     const { title, slug, coverImage, content, excerpt, category, tags, status } = req.body;
     
-    // Process tags - handle both string and array
+    
     let processedTags = [];
     if (tags) {
       if (Array.isArray(tags)) {
@@ -68,7 +62,7 @@ const createBlog = async (req, res) => {
       }
     }
     
-    // Create slug if not provided
+   
     let finalSlug = slug;
     if (!finalSlug && title) {
       finalSlug = title
@@ -77,7 +71,7 @@ const createBlog = async (req, res) => {
         .replace(/^-|-$/g, '');
     }
     
-    // Check if slug already exists
+    
     const existingBlog = await Blog.findOne({ slug: finalSlug });
     if (existingBlog) {
       return res.status(400).json({ message: 'Slug already exists' });
@@ -101,9 +95,7 @@ const createBlog = async (req, res) => {
   }
 };
 
-// @desc    Update blog
-// @route   PUT /api/blogs/:id
-// @access  Private
+
 const updateBlog = async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id);
@@ -112,7 +104,7 @@ const updateBlog = async (req, res) => {
       return res.status(404).json({ message: 'Blog not found' });
     }
     
-    // Process tags if present in request body
+   
     if (req.body.tags) {
       if (Array.isArray(req.body.tags)) {
         req.body.tags = req.body.tags;
@@ -121,7 +113,7 @@ const updateBlog = async (req, res) => {
       }
     }
     
-    // Process slug if title is being updated and no slug provided
+   
     if (req.body.title && !req.body.slug) {
       req.body.slug = req.body.title
         .toLowerCase()
@@ -141,9 +133,7 @@ const updateBlog = async (req, res) => {
   }
 };
 
-// @desc    Delete blog
-// @route   DELETE /api/blogs/:id
-// @access  Private
+
 const deleteBlog = async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id);
