@@ -52,7 +52,6 @@ const blogSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// REMOVED the pre-save middleware - it's causing the error
-// Slug is now handled entirely in the controller
+
 
 module.exports = mongoose.model('Blog', blogSchema);
