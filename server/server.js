@@ -7,7 +7,7 @@ dotenv.config();
 
 const app = express();
 
-// Middleware
+
 app.use(cors({
   origin: process.env.CLIENT_URL || 'http://localhost:3000',
   credentials: true
@@ -15,19 +15,19 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Routes
+
 const authRoutes = require('./routes/auth');
 const blogRoutes = require('./routes/blog');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/blogs', blogRoutes);
 
-// Test route
+
 app.get('/api/test', (req, res) => {
   res.json({ message: 'Server is running!' });
 });
 
-// Error handling middleware
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(err.status || 500).json({
@@ -36,7 +36,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Connect to MongoDB - FIXED: Removed deprecated options
+
 console.log('Connecting to MongoDB...');
 mongoose.connect(process.env.MONGODB_URI)
 .then(() => {
