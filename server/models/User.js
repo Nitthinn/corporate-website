@@ -26,10 +26,8 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Remove the pre-save middleware completely
-// We'll hash the password manually in the seed script
 
-// Compare password method
+
 userSchema.methods.comparePassword = async function(candidatePassword) {
   return await bcrypt.compare(candidatePassword, this.password);
 };
