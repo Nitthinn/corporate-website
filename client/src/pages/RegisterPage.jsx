@@ -15,7 +15,7 @@ const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     
-    // Validation
+   
     if (!name || !email || !password || !confirmPassword) {
       toast.error('Please fill in all fields')
       return
@@ -42,13 +42,13 @@ const RegisterPage = () => {
       })
       
       if (response.data.success) {
-        // Save token to localStorage
+        
         localStorage.setItem('token', response.data.token)
         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`
         
         toast.success('Registration successful! Redirecting to dashboard...')
         
-        // Redirect to admin dashboard after 2 seconds
+       
         setTimeout(() => {
           navigate('/admin')
         }, 1500)
