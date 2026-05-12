@@ -47,9 +47,9 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.error('Login error:', error.response?.data)
       
-      // Handle different error cases
+      
       if (error.response) {
-        // Server responded with error status
+       
         const errorMessage = error.response.data?.message || 'Login failed'
         
         if (error.response.status === 401) {
@@ -60,10 +60,9 @@ export const AuthProvider = ({ children }) => {
           toast.error('Login failed. Please try again.')
         }
       } else if (error.request) {
-        // Request was made but no response
+       
         toast.error('Cannot connect to server. Please check if backend is running.')
       } else {
-        // Something else happened
         toast.error('An error occurred. Please try again.')
       }
       
