@@ -39,3 +39,14 @@ dump/
 # Temp files
 *.tmp
 *.temp
+
+# Create/update .gitignore
+echo "node_modules/" >> .gitignore
+echo "package-lock.json" >> .gitignore
+echo "client/node_modules" >> .gitignore
+echo "server/node_modules" >> .gitignore
+echo "client/package-lock.json" >> .gitignore
+echo "server/package-lock.json" >> .gitignore
+echo ".env" >> .gitignore
+echo ".vite/" >> .gitignore
+echo "dist/" >> .gitignore
